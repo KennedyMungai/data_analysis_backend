@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["dotenv", "fastapi", "kinde"]
+		"cSpell.words": ["dotenv", "fastapi", "kinde", "starlette"]
 	}
 }
