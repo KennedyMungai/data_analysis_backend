@@ -1,0 +1,15 @@
+{
+	"devCommand": "fastapi run main:app",
+	"builds": [
+		{
+			"src": "app/main.py",
+			"use": "@vercel/python"
+		}
+	],
+	"routes": [
+		{
+			"src": "/(.*)",
+			"dest": "app/main.py"
+		}
+	]
+}
