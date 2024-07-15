@@ -15,6 +15,7 @@
 			"onupdate",
 			"poolclass",
 			"psycopg",
+			"pydantic",
 			"sessionmaker",
 			"sqlalchemy",
 			"starlette"
