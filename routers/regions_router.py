@@ -57,7 +57,7 @@ async def retrieve_one_region_endpoint(
         return await retrieve_one_region_service(_region_id, _db)
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
+            status_code=status.HTTP_404_NOT_FOUND, detail=str(e)) from e
 
 
 @regions_router.post(
@@ -107,8 +107,15 @@ async def update_region_endpoint(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
 
 
-@regions_router.delete('/{region_id}', description='Deletes a region', status_code=status.HTTP_204_NO_CONTENT)
-async def delete_region_endpoint(_region_id: str, _db: Session = Depends(get_db)) -> None:
+@regions_router.delete(
+    '/{region_id}',
+    description='Deletes a region',
+    status_code=status.HTTP_204_NO_CONTENT
+)
+async def delete_region_endpoint(
+    _region_id: str,
+    _db: Session = Depends(get_db)
+) -> None:
     """The endpoint to delete a region from the database
 
     Args:
