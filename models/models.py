@@ -42,7 +42,8 @@ class Stores(Base):
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
 
-    region_id = Column(UUID, ForeignKey('regions.region_id'))
+    region_id = Column(UUID, ForeignKey(
+        'regions.region_id', ondelete='CASCADE'))
 
     employees = relationship('Employees', back_populates='store')
     incidents = relationship('Incidents', back_populates='store')
@@ -66,8 +67,9 @@ class Employees(Base):
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
     is_active = Column(Boolean, default=True, nullable=False)
 
-    region_id = Column(UUID, ForeignKey('regions.region_id'))
-    store_id = Column(UUID, ForeignKey('stores.store_id'))
+    region_id = Column(UUID, ForeignKey(
+        'regions.region_id', ondelete='CASCADE'))
+    store_id = Column(UUID, ForeignKey('stores.store_id', ondelete='CASCADE'))
 
     incidents = relationship('Incidents', back_populates='employee')
 
@@ -86,7 +88,7 @@ class StoreSections(Base):
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
 
-    store_id = Column(UUID, ForeignKey('stores.store_id'))
+    store_id = Column(UUID, ForeignKey('stores.store_id', ondelete='CASCADE'))
 
     incidents = relationship('Incidents', back_populates='store_section')
 
@@ -109,11 +111,13 @@ class Incidents(Base):
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
 
-    region_id = Column(UUID, ForeignKey('regions.region_id'))
-    store_id = Column(UUID, ForeignKey('stores.store_id'))
+    region_id = Column(UUID, ForeignKey(
+        'regions.region_id', ondelete='CASCADE'))
+    store_id = Column(UUID, ForeignKey('stores.store_id', ondelete='CASCADE'))
     store_section_id = Column(UUID, ForeignKey(
-        'store_sections.store_section_id'))
-    employee_id = Column(UUID, ForeignKey('employees.employee_id'))
+        'store_sections.store_section_id', ondelete='CASCADE'))
+    employee_id = Column(UUID, ForeignKey(
+        'employees.employee_id', ondelete='CASCADE'))
 
     employee = relationship('Employees', back_populates='incidents')
     region = relationship('Regions', back_populates='incidents')
