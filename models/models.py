@@ -1,11 +1,11 @@
 """The file containing the models for the application"""
+import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, DateTime, String, Text, Integer, Float, ForeignKey
+from sqlalchemy import (Boolean, Column, DateTime, Float, ForeignKey, Integer,
+                        String, Text)
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
 from sqlalchemy.orm import relationship
-from geoalchemy2 import Geometry
 
 from database.db import Base
 
@@ -40,7 +40,7 @@ class Stores(Base):
     store_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
                       default=uuid.uuid4)
     store_name = Column(String(255), nullable=False)
-    store_location = Column(Geometry('POINT'), nullable=False)
+    # TODO: Add the field for store location
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
 
