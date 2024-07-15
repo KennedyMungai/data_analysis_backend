@@ -9,6 +9,7 @@
 			"autoflush",
 			"dotenv",
 			"fastapi",
+			"geoalchemy",
 			"kinde",
 			"onupdate",
 			"psycopg",
