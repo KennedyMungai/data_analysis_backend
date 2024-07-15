@@ -85,7 +85,7 @@ async def create_region_endpoint(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
 
 
-@regions_router.put('/{region_id}', description='Updates a region', status_code=status.HTTP_200_OK)
+@regions_router.put('/{region_id}', description='Updates a region', status_code=status.HTTP_202_ACCEPTED)
 async def update_region_endpoint(
         _region_id: str,
         _update_region_data: UpdateRegion,
