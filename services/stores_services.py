@@ -9,7 +9,7 @@ from schemas.stores_schema import CreateStore, ReadStore, UpdateStore
 
 
 async def create_store_service(
-    _store_data: CreateStore, _region_id: UUID, _db: Session
+    _store_data: CreateStore, _db: Session
 ) -> ReadStore:
     """Create a store in the database.
 
@@ -22,7 +22,7 @@ async def create_store_service(
         ReadStore: The newly created store.
     """
     store_data = _store_data.model_dump()
-    store = Stores(region_id=_region_id, **store_data)
+    store = Stores(**store_data)
 
     _db.add(store)
     _db.commit()
