@@ -86,7 +86,7 @@ async def create_region_endpoint(
 
 
 @regions_router.put(
-    '/{region_id}',
+    '/{_region_id}',
     description='Updates a region',
     status_code=status.HTTP_202_ACCEPTED
 )
