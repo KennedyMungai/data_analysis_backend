@@ -2,11 +2,8 @@
 import os
 
 from dotenv import find_dotenv, load_dotenv
-from fastapi import Depends, FastAPI, status
-from kinde_sdk.kinde_api_client import KindeApiClient
+from fastapi import FastAPI, status
 from starlette.middleware.sessions import SessionMiddleware
-
-from kinde.kinde import get_kinde_client
 
 load_dotenv(find_dotenv())
 
@@ -26,11 +23,10 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
     description='The root endpoint of the application',
     status_code=status.HTTP_200_OK
 )
-async def root(kinde_client: KindeApiClient = Depends(get_kinde_client)):
+async def root():
     """The root endpoint of the application
 
     Returns:
         dict: A simple message
     """
-    print(kinde_client)
     return {'Message': 'Hello World'}
