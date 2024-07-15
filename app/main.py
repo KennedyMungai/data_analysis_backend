@@ -6,6 +6,7 @@ from fastapi import FastAPI, status
 from starlette.middleware.sessions import SessionMiddleware
 
 from routers.regions_router import regions_router
+from routers.stores_router import stores_router
 
 load_dotenv(find_dotenv())
 
@@ -35,3 +36,4 @@ async def root():
 
 
 app.include_router(regions_router)
+app.include_router(stores_router)
