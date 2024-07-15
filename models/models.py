@@ -74,6 +74,8 @@ class Employees(Base):
         'regions.region_id', ondelete='CASCADE'))
     store_id = Column(UUID, ForeignKey('stores.store_id', ondelete='CASCADE'))
 
+    region = relationship('Regions', back_populates='employees')
+    store = relationship('Stores', back_populates='employees')
     incidents = relationship('Incidents', back_populates='employee')
 
 
@@ -94,6 +96,7 @@ class StoreSections(Base):
     store_id = Column(UUID, ForeignKey('stores.store_id', ondelete='CASCADE'))
 
     incidents = relationship('Incidents', back_populates='store_section')
+    store = relationship('Stores', back_populates='store_sections')
 
 
 class Incidents(Base):
