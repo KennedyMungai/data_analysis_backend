@@ -61,7 +61,6 @@ async def retrieve_one_store_endpoint(_store_id: UUID, _db: Session = Depends(ge
 
 @stores_router.post('/', description='Creates a store', status_code=status.HTTP_201_CREATED)
 async def create_store_endpoint(
-    _region_id: UUID,
     _store_data: CreateStore,
     _db: Session = Depends(get_db)
 ) -> ReadStore:
@@ -76,7 +75,7 @@ async def create_store_endpoint(
         ReadStore: The newly created store
     """
     try:
-        return await create_store_service(_store_data, _region_id, _db)
+        return await create_store_service(_store_data, _db)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
