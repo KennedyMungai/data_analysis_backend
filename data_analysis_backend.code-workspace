@@ -5,6 +5,13 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["dotenv", "fastapi", "kinde", "starlette"]
+		"cSpell.words": [
+			"dotenv",
+			"fastapi",
+			"kinde",
+			"sessionmaker",
+			"sqlalchemy",
+			"starlette"
+		]
 	}
 }
