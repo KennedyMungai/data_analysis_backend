@@ -1,7 +1,9 @@
 """The file containing the models for the application"""
 from datetime import datetime
 
-from sqlalchemy import UUID, Boolean, Column, DateTime, String, Text, Integer, Float, ForeignKey
+from sqlalchemy import Boolean, Column, DateTime, String, Text, Integer, Float, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 from sqlalchemy.orm import relationship
 from geoalchemy2 import Geometry
 
@@ -16,8 +18,8 @@ class Regions(Base):
     """
     __tablename__ = 'regions'
 
-    region_id = Column(UUID, primary_key=True, index=True,
-                       server_default='gen_random_uuid()')
+    region_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
+                       default=uuid.uuid4)
     region_name = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
@@ -35,8 +37,8 @@ class Stores(Base):
     """
     __tablename__ = 'stores'
 
-    store_id = Column(UUID, primary_key=True, index=True,
-                      server_default='gen_random_uuid()')
+    store_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
+                      default=uuid.uuid4)
     store_name = Column(String(255), nullable=False)
     store_location = Column(Geometry('POINT'), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
@@ -59,7 +61,7 @@ class Employees(Base):
     __tablename__ = 'employees'
 
     employee_id = Column(UUID, primary_key=True, index=True,
-                         server_default='gen_random_uuid()')
+                         default=uuid.uuid4)
     employee_name = Column(String(255), nullable=False)
     employee_email = Column(String(255), nullable=False)
     employee_phone_number = Column(String(255), nullable=False)
@@ -83,7 +85,7 @@ class StoreSections(Base):
     __tablename__ = 'store_sections'
 
     store_section_id = Column(UUID, primary_key=True, index=True,
-                              server_default='gen_random_uuid()')
+                              default=uuid.uuid4)
     store_section_name = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
@@ -102,7 +104,7 @@ class Incidents(Base):
     __tablename__ = 'incidents'
 
     incident_id = Column(UUID, primary_key=True, index=True,
-                         server_default='gen_random_uuid()')
+                         default=uuid.uuid4)
     incident_description = Column(Text, nullable=False)
     product_name = Column(String(255), nullable=True)
     product_code = Column(String(50), nullable=True)
