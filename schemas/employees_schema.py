@@ -38,6 +38,8 @@ class CreateEmployee(EmployeeBase):
     Args:
         EmployeeBase (Pydantic): The base schema for the employees
     """
+    region_id: UUID
+    store_id: UUID
 
 
 class UpdateEmployee(BaseModel):
@@ -49,6 +51,8 @@ class UpdateEmployee(BaseModel):
     employee_name: Optional[str] = None
     employee_email: Optional[EmailStr] = None
     employee_phone_number: Optional[str] = None
+    region_id: Optional[UUID] = None
+    store_id: Optional[UUID] = None
 
     class Config:
         """The config subclass for reading data"""
