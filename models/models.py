@@ -61,7 +61,7 @@ class Employees(Base):
     """
     __tablename__ = 'employees'
 
-    employee_id = Column(UUID, primary_key=True, index=True,
+    employee_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
                          default=uuid.uuid4)
     employee_name = Column(String(255), nullable=False)
     employee_email = Column(String(255), nullable=False)
@@ -87,7 +87,7 @@ class StoreSections(Base):
     """
     __tablename__ = 'store_sections'
 
-    store_section_id = Column(UUID, primary_key=True, index=True,
+    store_section_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
                               default=uuid.uuid4)
     store_section_name = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
@@ -107,7 +107,7 @@ class Incidents(Base):
     """
     __tablename__ = 'incidents'
 
-    incident_id = Column(UUID, primary_key=True, index=True,
+    incident_id = Column(UUID(as_uuid=True), primary_key=True, index=True,
                          default=uuid.uuid4)
     incident_description = Column(Text, nullable=False)
     product_name = Column(String(255), nullable=True)
