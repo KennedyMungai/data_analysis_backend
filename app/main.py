@@ -5,6 +5,8 @@ from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI, status
 from starlette.middleware.sessions import SessionMiddleware
 
+from routers.regions_router import regions_router
+
 load_dotenv(find_dotenv())
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -30,3 +32,6 @@ async def root():
         dict: A simple message
     """
     return {'Message': 'Hello World'}
+
+
+app.include_router(regions_router)
