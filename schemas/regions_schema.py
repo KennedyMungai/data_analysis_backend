@@ -1,4 +1,6 @@
 """The schema file for regions"""
+from uuid import UUID
+
 from datetime import datetime
 from typing import Optional
 
@@ -28,7 +30,7 @@ class ReadRegion(RegionBase):
     Args:
         RegionBase (BaseModel): The base schema for the regions data
     """
-    region_id: str
+    region_id: UUID
     created_at: datetime
     updated_at: Optional[datetime] = None
 
