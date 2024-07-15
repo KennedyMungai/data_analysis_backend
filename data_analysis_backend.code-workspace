@@ -12,6 +12,7 @@
 			"fastapi",
 			"geoalchemy",
 			"kinde",
+			"ondelete",
 			"onupdate",
 			"poolclass",
 			"psycopg",
