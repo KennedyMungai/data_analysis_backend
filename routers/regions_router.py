@@ -112,7 +112,7 @@ async def update_region_endpoint(
 
 
 @regions_router.delete(
-    '/{region_id}',
+    '/{_region_id}',
     description='Deletes a region',
     status_code=status.HTTP_204_NO_CONTENT
 )
