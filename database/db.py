@@ -1,6 +1,6 @@
 """The file with the database connection logic"""
 import os
-import psycopg
+import psycopg2
 
 from dotenv import find_dotenv, load_dotenv
 from sqlalchemy import create_engine
