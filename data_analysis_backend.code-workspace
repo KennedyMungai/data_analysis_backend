@@ -7,11 +7,13 @@
 	"settings": {
 		"cSpell.words": [
 			"autoflush",
+			"DBAPI",
 			"dotenv",
 			"fastapi",
 			"geoalchemy",
 			"kinde",
 			"onupdate",
+			"poolclass",
 			"psycopg",
 			"sessionmaker",
 			"sqlalchemy",
