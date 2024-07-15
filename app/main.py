@@ -5,6 +5,7 @@ from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI, status
 from starlette.middleware.sessions import SessionMiddleware
 
+from routers.employees_router import employees_router
 from routers.regions_router import regions_router
 from routers.stores_router import stores_router
 
@@ -37,3 +38,4 @@ async def root():
 
 app.include_router(regions_router)
 app.include_router(stores_router)
+app.include_router(employees_router)
