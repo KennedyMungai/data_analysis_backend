@@ -1,11 +1,16 @@
 """The routing file for the regions data"""
-from fastapi import APIRouter, status, Depends, HTTPException
 from typing import List
-from schemas.regions_schema import ReadRegion
-from sqlalchemy.orm import Session
-from database.db import get_db
-from services.regions_service import create_region_service, delete_region_service, retrieve_all_regions_service, retrieve_one_region_service, update_region_service
 
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from database.db import get_db
+from schemas.regions_schema import ReadRegion
+from services.regions_service import (create_region_service,
+                                      delete_region_service,
+                                      retrieve_all_regions_service,
+                                      retrieve_one_region_service,
+                                      update_region_service)
 
 regions_router = APIRouter(prefix='/regions', tags=['Regions'])
 
