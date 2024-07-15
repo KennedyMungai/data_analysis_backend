@@ -10,6 +10,7 @@
 			"dotenv",
 			"fastapi",
 			"kinde",
+			"psycopg",
 			"sessionmaker",
 			"sqlalchemy",
 			"starlette"
