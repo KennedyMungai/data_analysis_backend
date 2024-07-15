@@ -31,16 +31,19 @@ async def create_store_service(
     return store
 
 
-async def retrieve_all_stores_service(_db: Session) -> List[ReadStore]:
+async def retrieve_all_stores_in_a_region_service(
+    _region_id: UUID, _db: Session
+) -> List[ReadStore]:
     """The service used to fetch all stores from the database
 
     Args:
+        _region_id (UUID): The id of the region
         _db (Session): The database session
 
     Returns:
         List[ReadStore]: A list of the stores fetched
     """
-    return _db.query(Stores).all()
+    return _db.query(Stores).filter(Stores.region_id == _region_id).all()
 
 
 async def retrieve_one_store_service(_store_id: UUID, _db: Session) -> ReadStore:
