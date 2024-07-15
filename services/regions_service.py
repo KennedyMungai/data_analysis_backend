@@ -1,6 +1,7 @@
 """The file containing the services for the regions"""
-from sqlalchemy.orm import Session
 from typing import List
+
+from sqlalchemy.orm import Session
 
 from models.models import Regions
 from schemas.regions_schema import CreateRegion, ReadRegion, UpdateRegion
