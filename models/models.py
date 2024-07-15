@@ -55,6 +55,8 @@ class Employees(Base):
     Args:
         Base (_type_): Declarative Base instance
     """
+    __tablename__ = 'employees'
+
     employee_id = Column(UUID, primary_key=True, index=True,
                          server_default='gen_random_uuid()')
     employee_name = Column(String(255), nullable=False)
