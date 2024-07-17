@@ -37,7 +37,7 @@ async def retrieve_all_the_employees_in_a_store_service(
     Returns:
         List[ReadEmployee]: A list of the employees
     """
-    return _db.query(Employees).filter(Employees.store_id == _store_id).all()
+    return await _db.query(Employees).filter(Employees.store_id == _store_id).all()
 
 
 async def retrieve_all_the_employees_service(
@@ -67,7 +67,7 @@ async def retrieve_one_employee_service(
     Returns:
         ReadEmployee: The retrieved employee data
     """
-    return _db.query(Employees).filter(Employees.employee_id == _employee_id).first()
+    return await _db.query(Employees).filter(Employees.employee_id == _employee_id).first()
 
 
 async def create_employee_service(
@@ -84,9 +84,9 @@ async def create_employee_service(
         ReadEmployee: The newly created employee
     """
     employee = Employees(**_employee_data.model_dump())
-    _db.add(employee)
+    await _db.add(employee)
     _db.commit()
-    _db.refresh(employee)
+    await _db.refresh(employee)
     return employee
 
 
@@ -105,10 +105,10 @@ async def update_employee_service(
     Returns:
         ReadEmployee: The newly update employee info
     """
-    _db.query(Employees).filter(Employees.employee_id == _employee_id).update(
+    await _db.query(Employees).filter(Employees.employee_id == _employee_id).update(
         _update_employee_data.model_dump())
-    _db.commit()
-    return _db.query(Employees).filter(Employees.employee_id == _employee_id).first()
+    await _db.commit()
+    return await _db.query(Employees).filter(Employees.employee_id == _employee_id).first()
 
 
 async def delete_employee_service(
@@ -129,5 +129,5 @@ async def delete_employee_service(
     if not employee:
         return
 
-    _db.delete(employee)
+    await _db.delete(employee)
     _db.commit()

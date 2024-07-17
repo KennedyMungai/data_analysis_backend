@@ -18,9 +18,9 @@ async def create_region_service(_region_data: CreateRegion, _db: Session) -> Rea
         ReadRegion: The newly created region
     """
     region = Regions(**_region_data.model_dump())
-    _db.add(region)
+    await _db.add(region)
     _db.commit()
-    _db.refresh(region)
+    await _db.refresh(region)
     return region
 
 
@@ -33,7 +33,7 @@ async def retrieve_all_regions_service(_db: Session) -> List[ReadRegion]:
     Returns:
         List[ReadRegion]: A list of the regions fetched
     """
-    return _db.query(Regions).all()
+    return await _db.query(Regions).all()
 
 
 async def retrieve_one_region_service(_region_id: str, _db: Session) -> ReadRegion:
@@ -46,7 +46,7 @@ async def retrieve_one_region_service(_region_id: str, _db: Session) -> ReadRegi
     Returns:
         ReadRegion: The retrieved region data
     """
-    return _db.query(Regions).filter(Regions.region_id == _region_id).first()
+    return await _db.query(Regions).filter(Regions.region_id == _region_id).first()
 
 
 async def update_region_service(
@@ -72,7 +72,7 @@ async def update_region_service(
     region.region_name = _update_region_data.region_name
 
     _db.commit()
-    _db.refresh(region)
+    await _db.refresh(region)
     return region
 
 
@@ -88,5 +88,5 @@ async def delete_region_service(_region_id: str, _db: Session) -> None:
     if not region:
         return
 
-    _db.delete(region)
+    await _db.delete(region)
     _db.commit()
