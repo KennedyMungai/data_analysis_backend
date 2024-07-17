@@ -71,7 +71,7 @@ async def retrieve_single_store_section_endpoint(
 
 
 @store_sections_router.get(
-    '/{_store_id}',
+    '/store/{_store_id}',
     response_model=List[ReadStoreSection],
     name="retrieve_all_store_sections_in_a_store",
     status_code=status.HTTP_200_OK
