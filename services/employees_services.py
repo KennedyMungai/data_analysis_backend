@@ -2,17 +2,15 @@
 from typing import List
 from uuid import UUID
 
-from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from database.db import get_db
 from models.models import Employees
 from schemas.employees_schema import (CreateEmployee, ReadEmployee,
                                       UpdateEmployee)
 
 
 async def retrieve_all_the_employees_in_a_region_service(
-    _region_id: UUID, _db: Session = Depends(get_db)
+    _region_id: UUID, _db: Session
 ) -> List[ReadEmployee]:
     """The service used to fetch all employees from the database
 
@@ -28,7 +26,7 @@ async def retrieve_all_the_employees_in_a_region_service(
 
 async def retrieve_all_the_employees_in_a_store_service(
     _store_id: UUID,
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> List[ReadEmployee]:
     """The service function to retrieve the employee info of all the employees in a store`
 
@@ -43,7 +41,7 @@ async def retrieve_all_the_employees_in_a_store_service(
 
 
 async def retrieve_all_the_employees_service(
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> List[ReadEmployee]:
     """The service function to retrieve all the employees
 
@@ -58,7 +56,7 @@ async def retrieve_all_the_employees_service(
 
 async def retrieve_one_employee_service(
     _employee_id: UUID,
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> ReadEmployee:
     """The service function to retrieve a specific employee from the database
 
@@ -74,7 +72,7 @@ async def retrieve_one_employee_service(
 
 async def create_employee_service(
     _employee_data: CreateEmployee,
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> ReadEmployee:
     """The service function for creating employees in the database
 
@@ -95,7 +93,7 @@ async def create_employee_service(
 async def update_employee_service(
     _employee_id: UUID,
     _update_employee_data: UpdateEmployee,
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> ReadEmployee:
     """The service function for updating employees in the database
 
@@ -115,7 +113,7 @@ async def update_employee_service(
 
 async def delete_employee_service(
     _employee_id: UUID,
-    _db: Session = Depends(get_db)
+    _db: Session
 ) -> None:
     """The service function for deleting employees in the database
 
