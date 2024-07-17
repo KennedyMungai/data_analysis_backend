@@ -82,7 +82,7 @@ async def create_store_endpoint(
 
 
 @stores_router.put(
-    "/{store_id}",
+    "/{_store_id}",
     description="Updates a store",
     status_code=status.HTTP_202_ACCEPTED
 )

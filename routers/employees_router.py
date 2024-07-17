@@ -92,12 +92,12 @@ async def retrieve_all_the_employees_in_a_store_endpoint(
 
 
 @employees_router.get(
-    '/{employee_id}',
+    '/{_employee_id}',
     description='Retrieves one employee',
     status_code=status.HTTP_200_OK
 )
 async def retrieve_one_employee_endpoint(
-    employee_id: UUID,
+    _employee_id: UUID,
     _db: Session = Depends(get_db)
 ) -> ReadEmployee:
     """The endpoint function to retrieve a specific employee
@@ -110,7 +110,7 @@ async def retrieve_one_employee_endpoint(
         ReadEmployee: The employee
     """
     try:
-        return await retrieve_one_employee_service(employee_id, _db)
+        return await retrieve_one_employee_service(_employee_id, _db)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=str(e)) from e
@@ -142,12 +142,12 @@ async def create_employee_endpoint(
 
 
 @employees_router.put(
-    '/{employee_id}',
+    '/{_employee_id}',
     description='Updates an employee',
     status_code=status.HTTP_202_ACCEPTED
 )
 async def update_employee_endpoint(
-    employee_id: UUID,
+    _employee_id: UUID,
     _employee_data: UpdateEmployee,
     _db: Session = Depends(get_db)
 ) -> ReadEmployee:
@@ -162,19 +162,19 @@ async def update_employee_endpoint(
         ReadEmployee: The updated employee
     """
     try:
-        return await update_employee_service(employee_id, _employee_data, _db)
+        return await update_employee_service(_employee_id, _employee_data, _db)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
 
 
 @employees_router.delete(
-    '/{employee_id}',
+    '/{_employee_id}',
     description='Deletes an employee',
     status_code=status.HTTP_204_NO_CONTENT
 )
 async def delete_employee_endpoint(
-    employee_id: UUID,
+    _employee_id: UUID,
     _db: Session = Depends(get_db)
 ) -> None:
     """The endpoint function to delete an employee
@@ -184,7 +184,7 @@ async def delete_employee_endpoint(
         _db (Session, optional): The database session. Defaults to Depends(get_db).
     """
     try:
-        return await delete_employee_service(employee_id, _db)
+        return await delete_employee_service(_employee_id, _db)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e

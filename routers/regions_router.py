@@ -1,5 +1,6 @@
 """The routing file for the regions data"""
 from typing import List
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -41,7 +42,7 @@ async def retrieve_all_regions_endpoint(_db: Session = Depends(get_db)) -> List[
     status_code=status.HTTP_200_OK
 )
 async def retrieve_one_region_endpoint(
-    _region_id: str,
+    _region_id: UUID,
     _db: Session = Depends(get_db)
 ) -> ReadRegion:
     """The endpoint function to retrieve a specific region
@@ -91,7 +92,7 @@ async def create_region_endpoint(
     status_code=status.HTTP_202_ACCEPTED
 )
 async def update_region_endpoint(
-        _region_id: str,
+        _region_id: UUID,
         _update_region_data: UpdateRegion,
         _db: Session = Depends(get_db)) -> ReadRegion:
     """The endpoint function used to update region data
@@ -117,7 +118,7 @@ async def update_region_endpoint(
     status_code=status.HTTP_204_NO_CONTENT
 )
 async def delete_region_endpoint(
-    _region_id: str,
+    _region_id: UUID,
     _db: Session = Depends(get_db)
 ) -> None:
     """The endpoint to delete a region from the database
