@@ -1,9 +1,13 @@
 """The file that holds the store schemas"""
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel
+
+from schemas.employees_schema import ReadEmployee
+from schemas.incidents_schema import ReadIncident
+from schemas.store_sections_schema import ReadStoreSection
 
 
 class StoreBase(BaseModel):
@@ -24,6 +28,10 @@ class ReadStore(StoreBase):
     store_id: UUID
     created_at: datetime
     updated_at: Optional[datetime] = None
+
+    employees: List[ReadEmployee]
+    incidents: List[ReadIncident]
+    store_sections: List[ReadStoreSection]
 
     class Config:
         """Config subclass for reading store data"""
