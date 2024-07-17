@@ -33,6 +33,7 @@ class CreateStoreSection(StoreSectionsBase):
     Args:
         StoreSectionsBase (Pydantic): The base class for the schema
     """
+    store_id: UUID
 
 
 class UpdateStoreSection(BaseModel):
