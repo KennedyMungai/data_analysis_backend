@@ -54,7 +54,7 @@ async def retrieve_all_incidents_in_a_store_service(
     Returns:
         List[ReadIncident]: A list of the incidents fetched
     """
-    return await _db.query(Incidents).filter(Incidents.store_id == _store_id).all()
+    return _db.query(Incidents).filter(Incidents.store_id == _store_id).all()
 
 
 async def retrieve_all_incidents_in_a_store_section_service(
@@ -69,7 +69,7 @@ async def retrieve_all_incidents_in_a_store_section_service(
     Returns:
         List[ReadIncident]: A list of the incidents fetched
     """
-    return await _db.query(Incidents).filter(Incidents.store_section_id == _store_section_id).all()
+    return _db.query(Incidents).filter(Incidents.store_section_id == _store_section_id).all()
 
 
 async def retrieve_all_incidents_reported_by_an_employee_service(
@@ -84,7 +84,7 @@ async def retrieve_all_incidents_reported_by_an_employee_service(
     Returns:
         List[ReadIncident]: A list of the incidents fetched
     """
-    return await _db.query(Incidents).filter(Incidents.employee_id == _employee_id).all()
+    return _db.query(Incidents).filter(Incidents.employee_id == _employee_id).all()
 
 
 async def retrieve_a_single_incident_service(
@@ -99,7 +99,7 @@ async def retrieve_a_single_incident_service(
     Returns:
         ReadIncident: The retrieved incident
     """
-    return await _db.query(Incidents).filter(Incidents.incident_id == _incident_id).first()
+    return _db.query(Incidents).filter(Incidents.incident_id == _incident_id).first()
 
 
 async def update_an_incident_service(
@@ -116,7 +116,7 @@ async def update_an_incident_service(
     Returns:
         ReadIncident: The updated incident
     """
-    await _db.query(Incidents).filter(Incidents.incident_id == _incident_id).update(
+    _db.query(Incidents).filter(Incidents.incident_id == _incident_id).update(
         _update_incident_data.model_dump())
 
     _db.commit()
@@ -132,5 +132,5 @@ async def delete_an_incident_service(
         _incident_id (UUID): The id of the incident in the database
         _db (Session): The database session
     """
-    await _db.query(Incidents).filter(Incidents.incident_id == _incident_id).delete()
+    _db.query(Incidents).filter(Incidents.incident_id == _incident_id).delete()
     _db.commit()

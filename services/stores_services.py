@@ -24,9 +24,9 @@ async def create_store_service(
     store_data = _store_data.model_dump()
     store = Stores(**store_data)
 
-    await _db.add(store)
+    _db.add(store)
     _db.commit()
-    await _db.refresh(store)
+    _db.refresh(store)
 
     return store
 
@@ -43,7 +43,7 @@ async def retrieve_all_stores_in_a_region_service(
     Returns:
         List[ReadStore]: A list of the stores fetched
     """
-    return await _db.query(Stores).filter(Stores.region_id == _region_id).all()
+    return _db.query(Stores).filter(Stores.region_id == _region_id).all()
 
 
 async def retrieve_one_store_service(_store_id: UUID, _db: Session) -> ReadStore:
@@ -56,7 +56,7 @@ async def retrieve_one_store_service(_store_id: UUID, _db: Session) -> ReadStore
     Returns:
         ReadStore: The retrieved store data
     """
-    return await _db.query(Stores).filter(Stores.store_id == _store_id).first()
+    return _db.query(Stores).filter(Stores.store_id == _store_id).first()
 
 
 async def update_store_service(
@@ -74,11 +74,11 @@ async def update_store_service(
     Returns:
         ReadStore: The updated store
     """
-    await _db.query(Stores).filter(Stores.store_id == _store_id).update(
+    _db.query(Stores).filter(Stores.store_id == _store_id).update(
         _update_store_data.model_dump())
 
     _db.commit()
-    return await retrieve_one_store_service(_store_id, _db)
+    return retrieve_one_store_service(_store_id, _db)
 
 
 async def delete_store_service(_store_id: UUID, _db: Session):
@@ -88,5 +88,5 @@ async def delete_store_service(_store_id: UUID, _db: Session):
         _store_id (UUID): The id of the store in the database
         _db (Session): The database session
     """
-    await _db.query(Stores).filter(Stores.store_id == _store_id).delete()
+    _db.query(Stores).filter(Stores.store_id == _store_id).delete()
     _db.commit()
