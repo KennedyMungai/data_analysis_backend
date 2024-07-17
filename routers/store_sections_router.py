@@ -1,5 +1,6 @@
 """The router file for the store sections CRUD operations"""
 from typing import List
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -50,7 +51,7 @@ async def create_store_section_endpoint(
     status_code=status.HTTP_200_OK
 )
 async def retrieve_single_store_section_endpoint(
-        store_section_id: str,
+        store_section_id: UUID,
         db: Session = Depends(get_db)
 ) -> ReadStoreSection:
     """The endpoint for reading store sections
@@ -76,7 +77,7 @@ async def retrieve_single_store_section_endpoint(
     status_code=status.HTTP_200_OK
 )
 async def retrieve_all_store_sections_in_a_store_endpoint(
-        _store_id: str,
+        _store_id: UUID,
         db: Session = Depends(get_db)
 ) -> List[ReadStoreSection]:
     """The endpoint for updating store sections
@@ -102,7 +103,7 @@ async def retrieve_all_store_sections_in_a_store_endpoint(
     status_code=status.HTTP_202_ACCEPTED
 )
 async def update_store_section_endpoint(
-        store_section_id: str,
+        store_section_id: UUID,
         store_section: UpdateStoreSection,
         db: Session = Depends(get_db)
 ) -> ReadStoreSection:
@@ -130,7 +131,7 @@ async def update_store_section_endpoint(
     status_code=status.HTTP_204_NO_CONTENT
 )
 async def delete_store_section_endpoint(
-        store_section_id: str,
+        store_section_id: UUID,
         db: Session = Depends(get_db)
 ) -> None:
     """The endpoint for deleting store sections
