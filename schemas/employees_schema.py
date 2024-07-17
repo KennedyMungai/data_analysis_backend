@@ -1,9 +1,11 @@
 """The file containing the schemas for the employees"""
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
+
+from schemas.incidents_schema import ReadIncident
 
 
 class EmployeeBase(BaseModel):
@@ -26,6 +28,8 @@ class ReadEmployee(EmployeeBase):
     employee_id: UUID
     created_at: datetime
     updated_at: Optional[datetime] = None
+
+    incidents: List[ReadIncident]
 
     class Config:
         """Config subclass for reading employee data"""
