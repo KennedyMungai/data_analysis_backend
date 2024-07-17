@@ -42,4 +42,7 @@ class UpdateStoreSection(BaseModel):
         BaseModel (Pydantic): The base class for all schemas
     """
     store_section_name: Optional[str] = None
-    from_attributes = True
+
+    class Config:
+        """The config file for reading data from the database"""
+        from_attributes = True
