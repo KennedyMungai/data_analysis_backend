@@ -1,4 +1,5 @@
 """The schema file for the store sections"""
+from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
@@ -21,6 +22,8 @@ class ReadStoreSection(StoreSectionsBase):
         StoreSectionsBase (Pydantic): The base class for the schema
     """
     store_section_id: UUID
+    created_at: datetime
+    updated_at: Optional[datetime]
 
     class Config:
         """A subclass for reading data from the database"""
