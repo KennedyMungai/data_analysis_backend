@@ -16,7 +16,7 @@ from services.stores_services import (create_store_service,
 stores_router = APIRouter(prefix='/stores', tags=['Stores'])
 
 
-@stores_router.get('/', description='Retrieves all stores', status_code=status.HTTP_200_OK)
+@stores_router.get('/region/{_region_id}', description='Retrieves all stores', status_code=status.HTTP_200_OK)
 async def retrieve_all_stores_in_a_region_endpoint(
     _region_id: UUID, _db: Session = Depends(get_db)
 ) -> List[ReadStore]:
