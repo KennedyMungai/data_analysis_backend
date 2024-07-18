@@ -3,8 +3,7 @@ import os
 
 from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI, status
-from starlette.middleware.sessions import SessionMiddleware
-
+from fastapi.middleware.cors import CORSMiddleware
 from routers.employees_router import employees_router
 from routers.incidents_router import incidents_router
 from routers.regions_router import regions_router
@@ -20,7 +19,16 @@ app = FastAPI(title='Data Analysis',
               version='0.1.0'
               )
 
-app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+origins = ['http://localhost:3000',
+           'https://data-analysis-frontend.vercel.app/']
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 @app.get(
