@@ -11,7 +11,7 @@ from schemas.store_sections_schema import (CreateStoreSection,
 
 
 async def create_store_section_service(
-        _store_section: CreateStoreSection, _db: Session) -> ReadStoreSection:
+        _store_section_data: CreateStoreSection, _db: Session) -> ReadStoreSection:
     """The service function for creating store sections in the database
 
     Args:
@@ -19,7 +19,7 @@ async def create_store_section_service(
         _db (Session): The database session
     """
     _store_section_obj = StoreSections(
-        store_section_name=_store_section.store_section_name
+        **_store_section_data.model_dump()
     )
     _db.add(_store_section_obj)
     _db.commit()
