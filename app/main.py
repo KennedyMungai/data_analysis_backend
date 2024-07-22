@@ -4,7 +4,6 @@ import os
 from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from routers.employees_router import employees_router
 from routers.incidents_router import incidents_router
 from routers.regions_router import regions_router
 from routers.store_sections_router import store_sections_router
@@ -48,6 +47,5 @@ async def root():
 
 app.include_router(regions_router)
 app.include_router(stores_router)
-app.include_router(employees_router)
 app.include_router(store_sections_router)
 app.include_router(incidents_router)

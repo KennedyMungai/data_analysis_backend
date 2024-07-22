@@ -5,7 +5,6 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from schemas.employees_schema import ReadEmployee
 from schemas.incidents_schema import ReadIncident
 from schemas.stores_schema import ReadStore
 
@@ -38,7 +37,6 @@ class ReadRegion(RegionBase):
     updated_at: Optional[datetime] = None
 
     stores: List[ReadStore]
-    employees: List[ReadEmployee]
     incidents: List[ReadIncident]
 
     class Config:

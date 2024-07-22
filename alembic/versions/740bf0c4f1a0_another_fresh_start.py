@@ -1,8 +1,8 @@
-"""Initial commit
+"""Another fresh start
 
-Revision ID: c3e450304613
+Revision ID: 740bf0c4f1a0
 Revises: 
-Create Date: 2024-07-15 12:32:42.282788
+Create Date: 2024-07-22 15:03:34.143430
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c3e450304613'
+revision: str = '740bf0c4f1a0'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -38,21 +38,6 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('store_id')
     )
     op.create_index(op.f('ix_stores_store_id'), 'stores', ['store_id'], unique=False)
-    op.create_table('employees',
-    sa.Column('employee_id', sa.UUID(), nullable=False),
-    sa.Column('employee_name', sa.String(length=255), nullable=False),
-    sa.Column('employee_email', sa.String(length=255), nullable=False),
-    sa.Column('employee_phone_number', sa.String(length=255), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.Column('is_active', sa.Boolean(), nullable=False),
-    sa.Column('region_id', sa.UUID(), nullable=True),
-    sa.Column('store_id', sa.UUID(), nullable=True),
-    sa.ForeignKeyConstraint(['region_id'], ['regions.region_id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['store_id'], ['stores.store_id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('employee_id')
-    )
-    op.create_index(op.f('ix_employees_employee_id'), 'employees', ['employee_id'], unique=False)
     op.create_table('store_sections',
     sa.Column('store_section_id', sa.UUID(), nullable=False),
     sa.Column('store_section_name', sa.String(length=255), nullable=False),
@@ -70,13 +55,14 @@ def upgrade() -> None:
     sa.Column('product_code', sa.String(length=50), nullable=True),
     sa.Column('product_quantity', sa.Integer(), nullable=True),
     sa.Column('product_price', sa.Float(), nullable=True),
+    sa.Column('employee_id', sa.String(), nullable=False),
+    sa.Column('employee_name', sa.String(), nullable=False),
+    sa.Column('employee_email', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('region_id', sa.UUID(), nullable=True),
     sa.Column('store_id', sa.UUID(), nullable=True),
     sa.Column('store_section_id', sa.UUID(), nullable=True),
-    sa.Column('employee_id', sa.UUID(), nullable=True),
-    sa.ForeignKeyConstraint(['employee_id'], ['employees.employee_id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['region_id'], ['regions.region_id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['store_id'], ['stores.store_id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['store_section_id'], ['store_sections.store_section_id'], ondelete='CASCADE'),
@@ -92,8 +78,6 @@ def downgrade() -> None:
     op.drop_table('incidents')
     op.drop_index(op.f('ix_store_sections_store_section_id'), table_name='store_sections')
     op.drop_table('store_sections')
-    op.drop_index(op.f('ix_employees_employee_id'), table_name='employees')
-    op.drop_table('employees')
     op.drop_index(op.f('ix_stores_store_id'), table_name='stores')
     op.drop_table('stores')
     op.drop_index(op.f('ix_regions_region_id'), table_name='regions')
