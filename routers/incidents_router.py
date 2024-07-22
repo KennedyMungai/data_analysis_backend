@@ -132,7 +132,7 @@ async def retrieve_all_incidents_in_a_store_section_endpoint(
     status_code=status.HTTP_200_OK
 )
 async def retrieve_all_incidents_reported_by_an_employee_endpoint(
-    _employee_id: UUID,
+    _employee_id: str,
     _db: Session = Depends(get_db)
 ) -> List[ReadIncident]:
     """The endpoint for reading incidents

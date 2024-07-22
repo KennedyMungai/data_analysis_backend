@@ -17,6 +17,8 @@ class IncidentsBase(BaseModel):
     product_code: str
     product_quantity: int
     product_price: float
+    employee_name: str
+    employee_email: str
 
 
 class CreateIncident(IncidentsBase):
@@ -41,7 +43,7 @@ class ReadIncident(IncidentsBase):
     region_id: UUID
     store_id: UUID
     store_section_id: UUID
-    employee_id: UUID
+    employee_id: str
     created_at: datetime
     updated_at: Optional[datetime] = None
 

@@ -73,7 +73,7 @@ async def retrieve_all_incidents_in_a_store_section_service(
 
 
 async def retrieve_all_incidents_reported_by_an_employee_service(
-    _employee_id: UUID,
+    _employee_id: str,
     _db: Session
 ) -> List[ReadIncident]:
     """The service used to fetch all incidents from the database
