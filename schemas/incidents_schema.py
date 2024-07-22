@@ -28,7 +28,7 @@ class CreateIncident(IncidentsBase):
     region_id: UUID
     store_id: UUID
     store_section_id: UUID
-    employee_id: UUID
+    employee_id: str
 
 
 class ReadIncident(IncidentsBase):
