@@ -65,6 +65,7 @@ class Employees(Base):
                          default=uuid.uuid4)
     employee_name = Column(String(255), nullable=False)
     employee_email = Column(String(255), nullable=False)
+    employee_password = Column(String(255), nullable=False)
     employee_phone_number = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
     updated_at = Column(DateTime, nullable=True, onupdate=datetime.now())
